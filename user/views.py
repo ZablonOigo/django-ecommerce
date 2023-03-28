@@ -41,7 +41,7 @@ def register_user(request):
             user=form.save(commit=False)
             user.username=user.username.lower()
             user.save()
-            messages.success(request,'You have siguned up succssfully')
+            messages.success(request,'You have siguned up successfully')
             login(request,user)
             return redirect('store:index')
         else:
