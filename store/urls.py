@@ -6,4 +6,5 @@ urlpatterns=[
     path('', views.index, name='index'),
     path('new/', views.new, name='create' ),
     path('detail/<int:id>/',views.detail_item,name='detail'),
+    
 ]
