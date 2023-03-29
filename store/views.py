@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404
 from.models import *
 from.forms import *
 def index(request):
@@ -18,6 +18,14 @@ def detail_item(request,id):
 
 
 def new(request):
-    form=Newform()
-    context={'form':form}
-    return render(request,'store/new_item.html',context)
+    if request.method =='POST':
+      form=Newform(request.POST, request.FILES)
+      if form.is_valid():
+          item=form.save(commit=False)
+          item.created_by=request.user
+          item.save()
+          return redirect('store:detail', pk=item.id)
+      else:
+       form=Newform()
+       context={'form':form}
+      return render(request,'store/new_item.html',context)
