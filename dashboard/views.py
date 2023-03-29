@@ -8,8 +8,3 @@ def index(request):
     context={'items':items}
     return render(request,'dashboard/index.html',context)
 
-@login_required
-def delete(request,id):
-    item=get_object_or_404(Item,id=id,created_by=request.user)
-    item.delete()
-    return redirect('dashboard:index')
