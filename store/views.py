@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from.models import *
-
+from.forms import *
 def index(request):
     items=Item.objects.filter(is_sold=False)[0:6]
     categories=Category.objects.all()
@@ -15,3 +15,9 @@ def detail_item(request,id):
     context={'item':item,
              'related_items':related_items}
     return render(request,'store/detail_item.html',context)
+
+
+def new(request):
+    form=Newform()
+    context={'form':form}
+    return render(request,'store/new_item.html',context)
